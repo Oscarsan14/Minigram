@@ -1,4 +1,3 @@
-
 import { Component, inject, input, signal } from '@angular/core';
 import { RestApiService } from '../../services/rest-api.service';
 import { MatIcon } from '@angular/material/icon';
