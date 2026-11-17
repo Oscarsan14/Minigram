@@ -1,0 +1,29 @@
+@for (comment of (comments | async) ?? []; track comment.id) {
+<div style="display: flex; align-items: center; gap: 10px; margin: 10px 0;">
+
+  <img src="http://localhost:3000/uploads/{{comment.avatar_filename}}"
+    style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover;">
+
+  <p style="flex: 1; margin: 0;">
+    <strong>{{ comment.username }}:</strong>
+    {{ comment.comment }}
+  </p>
+
+  @if (restApiService.getUsername() == comment.username) {
+  <button (click)="deleteComment(comment.id)">
+    <mat-icon>delete_outline</mat-icon>
+  </button>
+  }
+
+</div>
+}
+
+<div class="form" style="display: flex; align-items: center; gap: 10px; padding: 10px 0;">
+
+  <input matInput placeholder="Añade un comentario..." [value]="Newcomment()" (input)="updateComment($event)" />
+
+  <button matIconButton (click)="onCreateComment()">
+    <mat-icon>send</mat-icon>
+  </button>
+
+</div>

@@ -1,0 +1,12 @@
+<h1>Posts</h1>
+
+<div class="contenedor-posts">
+    @if (restApiService.isLoggedIn()) {
+        <h3>Welcome, {{restApiService.getUsername()}}!</h3>
+    }
+    @for (post of posts(); track post.id) {
+        <app-post [post]="post" />
+    } @empty {
+        <div><span>No hay elementos disponibles.</span></div>
+    }
+</div>

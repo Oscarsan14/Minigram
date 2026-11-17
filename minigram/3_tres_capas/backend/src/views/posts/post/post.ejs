@@ -1,0 +1,176 @@
+
+<li>
+    <p><strong>Usuario: </strong><%= post.username %></p>
+    <p><strong>Descripción: </strong><%= post.caption %></p>
+
+    <% if (post.image_filename) { %>
+        <img src="/uploads/<%= post.image_filename %>" alt="Imagen del post" width="200">
+    <% } %>
+
+    <p>
+        <strong>Likes: <span id="likes-<%= post.id %>">0</span></strong>
+    </p>
+
+    <br>
+
+    <% if (locals.username == post.username) { %>
+        <button href="/posts/delete-post/<%= post.id %>">Eliminar post</button>
+    <% } %>
+
+    <button onclick="switchLike(<%= post.id %>)" id="like-<%= post.id %>">
+        Like
+    </button>
+
+    <h3>Comentarios</h3>
+
+    <div id="comments-<%= post.id %>">
+        <p>PRUEBA: Aquí aparecerán los comentarios</p>
+    </div>
+
+    <input type="text" id="comment-input-<%= post.id %>">
+
+   <button type="button" class="btn-comentar" data-post-id="<%= post.id %>">
+        Comentar
+    </button>
+    <hr>
+</li>
+
+<script>
+    // Actualizar el contador de likes
+    async function updateLikeCount(postId) {
+        const respuesta = await fetch(`/like/count/${postId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const datos = await respuesta.json();
+
+        document.getElementById(`likes-${postId}`).textContent = datos.count;
+    }
+
+    // Comprobar si el usuario ha dado like
+    async function doILike(postId) {
+        const respuesta = await fetch(`/like/doILike/${postId}`, {
+            method: 'POST'
+        });
+
+        const resultado = await respuesta.text();
+
+        const boton = document.getElementById(`like-${postId}`);
+
+        if (resultado === 'true') {
+            boton.textContent = 'Unlike';
+        } else {
+            boton.textContent = 'Like';
+        }
+    }
+
+    // Añadir o quitar like
+    async function switchLike(postId) {
+        await fetch(`/like/switch-like/${postId}`, {
+            method: 'GET'
+        });
+
+        await updateLikeCount(postId);
+        await doILike(postId);
+    }
+
+    // Cargar los likes al abrir la página
+    document.querySelectorAll('[id^="likes-"]').forEach(elemento => {
+        const postId = elemento.id.replace('likes-', '');
+
+        updateLikeCount(postId);
+        doILike(postId);
+    });
+
+    // Mostrar los comentarios
+    async function updateComments(postId) {
+        const respuesta = await fetch(`/comment/list/${postId}`);
+        const comentarios = await respuesta.json();
+        console.log('Comentarios recibidos:', comentarios);
+
+        const caja = document.getElementById(`comments-${postId}`);
+        caja.innerHTML = '';
+
+        comentarios.forEach(comentario => {
+            const div = document.createElement('div');
+
+            const texto = document.createElement('p');
+            texto.textContent = `${comentario.username}: ${comentario.comment}`;
+            div.appendChild(texto);
+
+            const boton = document.createElement('button');
+            boton.textContent = 'Eliminar';
+            boton.onclick = () => deleteComment(comentario.id, postId);
+            div.appendChild(boton);
+
+            caja.appendChild(div);
+        });
+    }
+
+    // Crear un comentario
+    async function createComment(postId) {
+        alert('Entrando en createComment');
+
+        const input = document.getElementById(`comment-input-${postId}`);
+
+        if (!input) {
+            alert('No se encuentra la caja de comentarios del post ' + postId);
+            return;
+        }
+
+        const comment = input.value.trim();
+
+        if (comment === '') {
+            return;
+        }
+
+        const respuesta = await fetch(`/comment/create/${postId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ comment })
+        });
+
+        if (!respuesta.ok) {
+            alert('No se pudo crear el comentario');
+            return;
+        }
+
+        input.value = '';
+        updateComments(postId);
+    }
+
+    // Eliminar un comentario
+    async function deleteComment(commentId, postId) {
+        const respuesta = await fetch(`/comment/delete/${commentId}`, {
+            method: 'GET'
+        });
+
+        if (!respuesta.ok) {
+            alert('No se pudo eliminar el comentario');
+            return;
+        }
+
+        updateComments(postId);
+    }
+
+    
+    // Cargar los comentarios al abrir la página
+    document.querySelectorAll('.btn-comentar').forEach(boton => {
+        boton.onclick = () => {
+            createComment(boton.dataset.postId);
+        };
+    });
+
+    // Cargar los comentarios al entrar en la página
+    document.querySelectorAll('[id^="comments-"]').forEach(elemento => {
+        const postId = elemento.id.replace('comments-', '');
+        updateComments(postId);
+    });
+
+    
+</script>

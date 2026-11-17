@@ -1,0 +1,13 @@
+<%- include ('../partials/header') %>
+
+<form action="/posts/create-post" method="post" enctype="multipart/form-data">
+    <label for="caption">Descripcion: </label>
+    <textarea type="caption" name="caption"></textarea><br><br>
+
+    <label for="image">Imagen: </label>
+    <input type="file" id="image" name="image" accept="image/*"><br><br>
+
+    <button type="submit">Enviar</button>
+</form>
+
+<%- include('../partials/footer') %>    

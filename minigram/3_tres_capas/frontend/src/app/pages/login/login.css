@@ -1,0 +1,33 @@
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 35px;
+  width: 320px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.login-container h1 {
+  margin: 0;
+  font-weight: bold;
+}
+
+.login-container p {
+  color: gray;
+  margin-bottom: 15px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+button {
+  padding: 22px;
+  border-radius: 8px;
+  background-color: #6654db !important;
+  color: white !important;
+}

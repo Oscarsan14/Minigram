@@ -1,0 +1,28 @@
+<mat-grid-list cols="3" rowHeight="500px">
+  <mat-grid-tile></mat-grid-tile>
+
+  <mat-grid-tile>
+    <div class="login-container">
+
+      <h1>Bienvenido</h1>
+      <p>Inicia sesión en tu cuenta</p>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Usuario</mat-label>
+        <input matInput placeholder="Username" (input)="updateUsername($event)">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" (input)="updatePassword($event)">
+      </mat-form-field>
+
+      <button mat-flat-button type="button" (click)="onlogin()">
+        Iniciar sesión
+      </button>
+
+    </div>
+  </mat-grid-tile>
+
+  <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>

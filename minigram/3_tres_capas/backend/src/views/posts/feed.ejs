@@ -1,0 +1,12 @@
+<%- include('../partials/header') %>
+
+<main>
+    <h2>Feed</h2>
+    <ul>
+        <% posts.forEach(post => { %>
+            <%- include('post/post', { post: post }) %>
+        <% }); %>
+
+    </ul>
+</main> 
+

@@ -1,0 +1,7 @@
+<div class="likes-container">
+  <button class="like-btn" (click)="darLike()" [class.liked]="meGusta()">
+    <mat-icon>{{ meGusta() ? 'favorite' : 'favorite_border' }}</mat-icon>
+  </button>
+
+  <span class="like-count">{{ likes() }} Me gusta</span>
+</div>
