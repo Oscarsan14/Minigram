@@ -2,11 +2,11 @@
 
 <div class="contenedor-posts">
     @if (restApiService.isLoggedIn()) {
-        <h3>Welcome, {{restApiService.getUsername()}}!</h3>
+    <h3>Welcome, {{restApiService.getUsername()}}!</h3>
     }
+
     @for (post of posts(); track post.id) {
-        <app-post [post]="post" />
-    } @empty {
-        <div><span>No hay elementos disponibles.</span></div>
+    <app-post [post]="post" (postDeleted)="eliminarPost($event)" /> } @empty {
+    <div><span>No hay elementos disponibles.</span></div>
     }
 </div>

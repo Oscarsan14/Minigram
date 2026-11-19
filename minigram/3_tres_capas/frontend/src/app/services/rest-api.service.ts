@@ -100,26 +100,50 @@ export class RestApiService {
     }
 
     // Likes
-countLikes(postId: number): Observable<any> {
-  return this.http.get(
-    this.apiURL + `/likes/count/${postId}`,
-    this.headers
-  );
-}
-
-switchLike(postId: number): Observable<any> {
-  return this.http.get(
-    this.apiURL + `/likes/switch-like/${postId}`,
-    {
-      ...this.headers,
-      responseType: 'text'
+    countLikes(postId: number): Observable<any> {
+        return this.http.get(
+            this.apiURL + `/likes/count/${postId}`,
+            this.headers
+        );
     }
-  );
-}
-checkLike(postId: number): Observable<boolean> {
-  return this.http.get<boolean>(
-    this.apiURL + `/likes/doILike/${postId}`,
-    this.headers
-  );
-}
+
+    switchLike(postId: number): Observable<any> {
+        return this.http.get(
+            this.apiURL + `/likes/switch-like/${postId}`,
+            {
+                ...this.headers,
+                responseType: 'text'
+            }
+        );
+    }
+    checkLike(postId: number): Observable<boolean> {
+        return this.http.get<boolean>(
+            this.apiURL + `/likes/doILike/${postId}`,
+            this.headers
+        );
+    }
+
+    createPost(caption: string, file: File): Observable<any> {
+        const formData = new FormData();
+        formData.append('caption', caption);
+        formData.append('image', file);
+
+        return this.http.post(
+            this.apiURL + '/posts/create-post',
+            formData,
+            this.headers
+        );
+    }
+
+
+    deletePost(postId: number): Observable<any> {
+        return this.http.delete(
+            this.apiURL + '/posts/delete-post/' + postId,
+            {
+                ...this.headers,
+                responseType: 'text'
+            }
+        );
+    }
+
 }

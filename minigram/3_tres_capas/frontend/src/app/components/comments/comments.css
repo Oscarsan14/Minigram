@@ -1,140 +1,128 @@
-
 :host {
-    display: block;
-    font-family: inherit;
+  display: block;
+  font-family: inherit;
 }
 
-/* Cada comentario */
 :host > div:not(.form) {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 9px 4px;
-    margin: 0 !important;
-    border-radius: 10px;
-    transition: background 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 2px;
+  margin: 0 !important;
+  border-bottom: 1px solid #f5f1f6;
+  transition: background .2s;
 }
 
 :host > div:not(.form):hover {
-    background: #fafafa;
+  background: #fdfaff;
 }
 
-/* Avatar */
 :host > div:not(.form) img {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
-    border: 1px solid #ededed;
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid #eee;
 }
 
-/* Texto */
 :host > div:not(.form) p {
-    flex: 1;
-    margin: 0;
-    font-size: 13px;
-    line-height: 1.5;
-    color: #444;
-    overflow-wrap: anywhere;
-    min-width: 0;
+  flex: 1;
+  margin: 0 !important;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #4b4658;
+  overflow-wrap: anywhere;
+  min-width: 0;
 }
 
 :host > div:not(.form) strong {
-    color: #202020;
-    font-size: 13px;
-    font-weight: 700;
-    margin-right: 4px;
+  font-weight: 700;
+  color: #222033;
+  margin-right: 4px;
 }
 
-/* Botón eliminar */
 :host > div:not(.form) button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    flex-shrink: 0;
-    border: none;
-    border-radius: 50%;
-    background: transparent;
-    color: #999;
-    cursor: pointer;
-    transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #9c94a4;
+  cursor: pointer;
 }
 
 :host > div:not(.form) button:hover {
-    background: #ffe8ed;
-    color: #e1306c;
+  background: #fff0f6;
+  color: #e91e63;
 }
 
 :host > div:not(.form) button mat-icon {
-    font-size: 19px;
-    width: 19px;
-    height: 19px;
+  font-size: 19px;
+  width: 19px;
+  height: 19px;
 }
 
-/* Formulario de nuevo comentario */
 .form {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 12px;
-    padding: 14px 0 0 !important;
-    border-top: 1px solid #eeeeee;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 12px 0 0 !important;
 }
 
-/* Campo de texto */
 .form input {
-    flex: 1;
-    min-width: 0;
-    height: 42px;
-    padding: 0 14px;
-    border: 1px solid #e4e4e7;
-    border-radius: 22px;
-    background: #f7f7f9;
-    font-size: 13px;
-    color: #222;
-    outline: none;
-    box-sizing: border-box;
-    transition: all 0.2s ease;
+  flex: 1;
+  min-width: 0;
+  height: 42px;
+  padding: 0 15px;
+  border: 1px solid #e7e0eb;
+  border-radius: 24px;
+  background: #faf8fc;
+  outline: none;
+  font-size: 13px;
+  color: #252338;
+  transition: border-color .2s, box-shadow .2s;
 }
 
 .form input:focus {
-    background: white;
-    border-color: #e1306c;
-    box-shadow: 0 0 0 3px rgba(225, 48, 108, 0.08);
+  background: white;
+  border-color: #ed3980;
+  box-shadow: 0 0 0 3px #f1277314;
 }
 
 .form input::placeholder {
-    color: #999;
+  color: #9a92a3;
 }
 
-/* Botón enviar */
 .form button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    flex-shrink: 0;
-    border: none;
-    border-radius: 50%;
-    background: #e1306c;
-    color: white;
-    cursor: pointer;
-    transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #f12773;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 3px 10px #f1277330;
+  transition: transform .2s, background .2s;
 }
 
 .form button:hover {
-    background: #c8235a;
-    transform: scale(1.08);
-    box-shadow: 0 4px 12px rgba(225, 48, 108, 0.25);
+  background: #d81961;
+  transform: scale(1.06);
 }
 
 .form button mat-icon {
-    font-size: 21px;
-    width: 21px;
-    height: 21px;
+  font-size: 21px;
+  width: 21px;
+  height: 21px;
 }

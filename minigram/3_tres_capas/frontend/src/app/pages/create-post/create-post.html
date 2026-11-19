@@ -1,0 +1,21 @@
+<mat-grid-list cols="3" rowHeight="500px">
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile>
+    <div class="post-container">
+      <h1>Crear post</h1>
+      <p>Comparte una nueva publicación</p>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput placeholder="Escribe algo..." (input)="updateCaption($event)"></textarea>
+      </mat-form-field>
+
+      <input type="file" accept="image/*" (change)="updateFile($event)">
+
+      <button mat-flat-button type="button" (click)="onSubmit()">
+        Publicar
+      </button>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile></mat-grid-tile>
+</mat-grid-list>

@@ -6,14 +6,10 @@ import { createPost, deletePost, getFeed } from '../services/posts.service.js';
 
 const postsRouter = Router();
 
-postsRouter.get('/create-post', isAuth, (req, res) => {
-    res.render('posts/create-post');
-});
-
 postsRouter.post('/create-post', isAuth, upload.single('image'), createPost);
 
 postsRouter.get('/feed', isAuth, getFeed);
 
-postsRouter.get('/delete-post/:id', isAuth, deletePost)
+postsRouter.delete('/delete-post/:id', isAuth, deletePost)
 
 export default postsRouter

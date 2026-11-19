@@ -1,6 +1,6 @@
 <main>
   <mat-toolbar>
-    <h1>>Parragram >///<</h1>
+    <h1>Parragram >///<</h1>
 
     <span class="example-spacer"></span>
 
@@ -10,6 +10,7 @@
       <a mat-button routerLink="/login">Login</a>
       <a mat-button routerLink="/register">Register</a>
     } @else {
+      <a mat-button routerLink="/create-post">Crear Post</a>
       <a mat-button (click)="onLogout()">Log out</a>
     }
 

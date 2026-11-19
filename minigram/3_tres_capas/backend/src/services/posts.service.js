@@ -2,13 +2,16 @@ import db from '../database/database.js';
 
 // Create Post
 const createPost = async (req, res) => {
-    if(!req.file){
+
+
+    if (!req.file) {
         return res.status(400).send('Debe seleccionar una imagen')
     }
 
     // Guardar la informacion en la base de datos
     const { caption } = req.body;
-    const username = req.cookies.username;
+
+    const username = req.username;
 
     const resultado = await db.query(
         'SELECT * FROM users WHERE username = $1',
@@ -28,7 +31,7 @@ const createPost = async (req, res) => {
         [userId, caption, req.file.filename]
     );
 
-    res.send('Post creado exitosamente')
+    res.send({ text: 'Post creado exitosamente' })
 }
 
 const deletePost = async (req, res) => {
@@ -37,7 +40,7 @@ const deletePost = async (req, res) => {
     const { id } = req.params;
 
     // para leer el usuario de la cookie de sesion, necesitamos el middleware
-    const username = req.cookies.username;
+    const username = req.username;
 
     // tendremos que borrar
     const resultadoPost = await db.query(
@@ -47,7 +50,7 @@ const deletePost = async (req, res) => {
 
     const post = resultadoPost.rows[0];
 
-    if(!post){
+    if (!post) {
         return res.status(404).send('Post no encontrado');
     }
 
@@ -62,16 +65,26 @@ const deletePost = async (req, res) => {
         return res.status(401).send('Usuario no encontrado');
     }
 
-    if (post.user_id !== user.id){
+    if (post.user_id !== user.id) {
         return res.status(403).send('No tienes permiso para eliminar este post')
     }
+
+    await db.query(
+        'DELETE FROM likes WHERE post_id = $1',
+        [id]
+    );
+
+    await db.query(
+        'DELETE FROM comments WHERE post_id = $1',
+        [id]
+    );
 
     await db.query(
         'DELETE FROM posts WHERE id = $1',
         [id]
     );
 
-    res.redirect('/posts/feed')
+    res.send('Post eliminado correctamente');
 }
 
 const getFeed = async (req, res) => {

@@ -1,10 +1,16 @@
-
 <mat-card class="example-card" appearance="outlined">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"
-      style="background-image: url('http://localhost:3000/uploads/{{post()?.avatar_filename}}');">
-    </div>
+      style="background-image: url('http://localhost:3000/uploads/{{post()?.avatar_filename}}');"></div>
     <mat-card-title>{{ post()?.username }}</mat-card-title>
+
+
+    @if (post()?.username === api.getUsername()) {
+    <button mat-icon-button class="delete-button" (click)="deletePost()" title="Eliminar publicación">
+      <mat-icon>delete_outline</mat-icon>
+    </button>
+    }
+
   </mat-card-header>
 
   <img src="http://localhost:3000/uploads/{{post()?.image_filename}}">
@@ -13,16 +19,13 @@
     <p>{{ post()?.caption }}</p>
   </mat-card-content>
 
-<mat-card-actions>
-  @if (post(); as publicacion) {
+  <mat-card-actions>
+    @if (post(); as publicacion) {
     <app-likes [postId]="publicacion.id.toString()" />
-  }
-</mat-card-actions>
+    }
+  </mat-card-actions>
 
   @if (post(); as publicacion) {
-    <app-comments
-      style="padding: 5px;"
-      [postId]="publicacion.id.toString()" />
+  <app-comments [postId]="publicacion.id.toString()" />
   }
-
 </mat-card>
