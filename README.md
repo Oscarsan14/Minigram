@@ -1,27 +1,37 @@
+# Minigram
 
-# Monolito con SQLite
+Minigram es una aplicación web que simula una red social, desarrollada en diferentes fases para trabajar distintos tipos de arquitecturas.
 
-## Descripción
-Proyecto desarrollado con una arquitectura monolítica que utiliza SQLite como base de datos.
+## Fases del proyecto
 
-## Tecnologías
-- Node.js
-- Express.js
-- SQLite
+- **Fase 1:** Arquitectura monolítica con Node.js, Express y SQLite.
+- **Fase 2:** Arquitectura con Node.js, Express y PostgreSQL.
+- **Fase 3:** Separación del frontend y el backend, utilizando Angular, Express y PostgreSQL.
 
-## Arquitectura
-La aplicación sigue una arquitectura monolítica, donde todas las funcionalidades se encuentran integradas en un único proyecto.
+## Funcionalidades
 
-## Base de datos
-Se utiliza SQLite, una base de datos ligera que almacena la información en un archivo local, sin necesidad de un servidor independiente.
-
-## Instalación
-```bash
-npm install
-```
+- Registro e inicio de sesión.
+- Creación y eliminación de publicaciones.
+- Visualización de publicaciones.
+- Comentarios.
+- Likes.
 
 ## Ejecución
+
+Para ejecutar cualquiera de las fases, hay que clonar el repositorio, entrar en la carpeta correspondiente y ejecutar:
+
 ```bash
-npm start
+docker compose build
+docker compose up -d
 ```
+
+Cada fase dispone de su propio archivo `docker-compose.yml` para ejecutarse de forma independiente.
+
+Para detener los contenedores:
+
+```bash
+docker compose down
+```
+
+
 docker compose down; docker compose build --no-cache; docker compose up -d
